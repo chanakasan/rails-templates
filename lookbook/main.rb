@@ -11,10 +11,12 @@ directory "files/src", "lookbook"
 
 inject_into_file "config/routes.rb", before: /^end/ do %Q{  
   if Rails.env.development?
-    mount Lookbook::Engine, at: "/docs"
+    mount Lookbook::Engine, at: "/lookbook"
   end
 }
 end
 
-git add: "."
-git commit: %Q{ -m "install and configure lookbook" }
+after_bundle do
+  git add: "."
+  git commit: %Q{ -m "install and configure lookbook" }
+end
